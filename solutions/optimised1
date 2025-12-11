@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class problem1_optimized {
+
+    // Rotate a string efficiently
+    public static String rotate(String s, char dir, int k) {
+        int n = s.length();
+        k = k % n;
+        if (k == 0) return s;
+
+        return (dir == 'L')
+                ? s.substring(k) + s.substring(0, k)
+                : s.substring(n - k) + s.substring(0, n - k);
+    }
+
+    public static void main(String[] args) {
+
+        // Example grid
+        String[] grid = {
+            "ABCDE",
+            "FGHIJ",
+            "KLMNO",
+            "PQRST",
+            "UVWXY"
+        };
+
+        // Example directions
+        char[] directions = {'R','L','R','L','R'};
+
+        for (int i = 0; i < grid.length; i++) {
+            grid[i] = rotate(grid[i], directions[i], 1);
+        }
+
+        int mid = grid.length / 2;
+        String middleRow = grid[mid];
+
+        int asciiSum = 0;
+        for (char c : middleRow.toCharArray()) {
+            asciiSum += (int) c;
+        }
+
+        System.out.println(asciiSum);
+    }
+}
